@@ -1,14 +1,34 @@
 import Video from "./components/Video";
-import Navbar from "./components/Navbar";
-import vid from "./data/data";
+
+import exportVideo from "./data/data";
 
 import PlayButton from "./components/playButton";
 
+import Counter from "./components/counter";
+
+import AddVideo from "./components/AddVideo"
 import "./App.css";
+import { useState } from "react";
+
+
+
+
+
 function App() {
+  const [vid,setVid]=useState(exportVideo)
+
+  function addVideos(video){
+    setVid([...vid,
+     {...video,id: vid.length+1}
+    ])
+  }
+
+
   return (
     <div className="App" onClick={()=>console.log('App')}>
-      <div>Videos</div>
+      <div >
+         <AddVideo addV={addVideos}></AddVideo>
+      </div>
       {vid.map((video) => (
         <Video
           key={video.id}
@@ -19,19 +39,21 @@ function App() {
           verified={video.verified}
           id={video.id}
         >
+          <div className="my-2 " style={{display:'flex',justifyContent:'center'}}>
+            <div>
           <PlayButton
             onPlay={() => console.log('Playing..',video.title)}
             onPause={() => console.log('Paused..',video.title)}
           >
             {video.title}
           </PlayButton>
+          </div>
+          </div>
         </Video>
       ))}
 
       <div style={{ clear: 'both' }}>
-        {/* <PlayButton message="play-msg" onPlay={()=>console.log('Play')} onPause={()=>console.log('Pause')}>Play</PlayButton> */}
-
-        {/* <PlayButton message="pause-msg" onSmash={()=>alert('Playyy')}>Pause</PlayButton> */}
+        <Counter/>
       </div>
     </div>
   );

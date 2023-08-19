@@ -1,18 +1,19 @@
+import { useState } from 'react';
 import './playButton.css'
 function PlayButton({children,onPlay,onPause}){
-    let play=true
+    const [play,setPlay]= useState(true)
   function click(e){
     e.stopPropagation()
-    if(play) onPlay();
+    if(play) onPlay() ;
     else onPause();
 
-    play=!play
+    setPlay(!play)
   }
   
 
     return(
         <>
-        <button className="btn btn-primary mx-4" id='id1' onClick={click}>{children} {play?"||":"<<"}</button>
+        <button className="btn btn-primary mx-4" id='id1' onClick={click}>{children} {!play?"▶️":"⏸️"}</button>
         
         </>
     );
