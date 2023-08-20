@@ -1,16 +1,20 @@
 import { useState } from "react"
 
+const initialState={
+    time: "",
+    channel: "",
+    verfied: ' ',
+    title:'',
+    views:''
+}
 function AddVideo({ addV }) {
-    const [video, setVideo] = useState({
-        time: "1 month",
-        channel: "Coder Dost",
-
-        verified: true
-    });
+    const [video, setVideo] = useState(initialState);
     function handleSubmit(e) {
         e.stopPropagation()
         e.preventDefault()
         addV(video)
+        setVideo(initialState)
+        
     }
     function handleChange(e) {
         e.stopPropagation()
@@ -18,17 +22,24 @@ function AddVideo({ addV }) {
             ...video,
             [e.target.name]: e.target.value
         })
+        
 
     }
     return (
         <form >
-            <div className="d-flex" style={{ justifyContent: 'center', flexDirection: 'column', width: '20%' }}>
-                <input onChange={handleChange} name="title" className="my-2 p-2" type="text" placeholder="Title" />
-                <input onChange={handleChange} name="views" className="my-2 p-2" type="text" placeholder="Views" />
-                {/* <input className="my-4" type="text" name="" id="" />
-        <input className="my-4" type="text" name="" id="" /> */}
+            <div className="d-flex" style={{ flexDirection:'column',margin:"0 auto", width: '20%' }}>
+                <div>
+                <input onChange={handleChange} name="title" className="my-2 p-2" type="text" placeholder="Title" value={video.title} />
+                <input onChange={handleChange} name="views" className="my-2 p-2" type="text" placeholder="Views" value={video.views} />
+                <input onChange={handleChange} name="channel" className="my-2 p-2" type="text" placeholder="Channel" value={video.channel} />
+                <input onChange={handleChange} name="time" className="my-2 p-2" type="text" placeholder="Time" value={video.time} />
+                <div className="d-flex">
+                <label htmlFor="verfied">is verified </label>
+                <input onChange={handleChange} className="my-2 mx-2" type="checkbox" name="verfied" id=""  value={video.verfied} />
+                </div>
+            <button className="btn btn-danger my-2" onClick={handleSubmit}> Add Video</button>
+                </div>
             </div>
-            <button className="btn btn-danger" onClick={handleSubmit}> Add Video</button>
         </form>
 
     );
