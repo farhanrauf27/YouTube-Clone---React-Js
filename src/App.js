@@ -13,11 +13,21 @@ function App() {
   function addVideos(video) {
     setVid([...vid, { ...video, id: vid.length + 1 }]);
   }
+  // Delete
+  function deleteVideo(id) {
+    setVid(vid.filter(video=>video.id!==id))
+   
+  }
+  function editVideo(id) {
+    
+   
+  }
   return (
     <div className="App" onClick={() => console.log("App")}>
-      <div>
+      <div className="d-flex" style={{justifyContent:'space-around'}}>
+      {/* delete */}
+        <VideoList deleteVideo={deleteVideo} editVideo={editVideo} vid={vid}></VideoList> 
         <AddVideo addV={addVideos}></AddVideo>
-        <VideoList vid={vid}></VideoList>
       </div>
     </div>
   );

@@ -2,7 +2,7 @@ import Video from "./Video";
 import PlayButton from "./playButton";
 
 
-function VideoList({vid}){
+function VideoList({vid,deleteVideo,editVideo}){
     return(
         <>
         {vid.map((video) => (
@@ -14,6 +14,9 @@ function VideoList({vid}){
           channel={video.channel}
           verfied={video.verfied}
           id={video.id}
+          // delete
+          deleteVideo={deleteVideo}
+          editVideo={editVideo}
         >
           <div className="my-2 " style={{display:'flex',justifyContent:'center'}}>
             <div>

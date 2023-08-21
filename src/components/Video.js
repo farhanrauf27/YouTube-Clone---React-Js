@@ -1,6 +1,6 @@
 import "./Video.css"
 
-function Video({ title, views, channel, time, id, verfied, children }) {
+function Video({ title, views, channel, time, id, verfied, children,deleteVideo,editVideo }) {
 
     // let jsx;
     // if(verfied){
@@ -9,11 +9,19 @@ function Video({ title, views, channel, time, id, verfied, children }) {
     // }else{
     //     jsx=<div className="channel">{channel}  </div>;
     // }
-
-
+    
     return (
         <>
-            <div className="container my-2 " >
+            <div className="container my-2 row " id="x" >
+                {/* Delete */}
+                <div className="d-flex" style={{justifyContent:'flex-end'}}>
+                <button className="btn btn-danger" onClick={()=>deleteVideo(id)} style={{borderRadius:'100px',marginBottom:'-40px',position:'relative'}}>X</button>
+                </div>
+                <div className="d-flex" style={{justifyContent:'flex-start'}}>
+                <button className="btn btn-primary" onClick={()=>editVideo(id)} style={{borderRadius:'100px',marginBottom:'-20px',position:'relative'}}>🖉
+</button>
+                </div>
+                
                 <div className="pic">
                     <img src={`https://picsum.photos/id/${id}/200/300`} alt="Katherine Johnson" />
                 </div>
@@ -26,6 +34,7 @@ function Video({ title, views, channel, time, id, verfied, children }) {
                 <div>
                     {children}
                 </div>
+                
             </div>
         </>
     );
