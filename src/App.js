@@ -9,6 +9,7 @@ import { useState } from "react";
 
 function App() {
   const [vid, setVid] = useState(exportVideo);
+  const [editableVideo, seteditableVideo] = useState(null);
 
   function addVideos(video) {
     setVid([...vid, { ...video, id: vid.length + 1 }]);
@@ -19,15 +20,15 @@ function App() {
    
   }
   function editVideo(id) {
-    
+   seteditableVideo(vid.find(video=>video.id===id))
    
   }
   return (
     <div className="App" onClick={() => console.log("App")}>
       <div className="d-flex" style={{justifyContent:'space-around'}}>
-      {/* delete */}
+      {/* delete  Update */}
         <VideoList deleteVideo={deleteVideo} editVideo={editVideo} vid={vid}></VideoList> 
-        <AddVideo addV={addVideos}></AddVideo>
+        <AddVideo editableVideo={editableVideo} addV={addVideos}></AddVideo>
       </div>
     </div>
   );

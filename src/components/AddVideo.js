@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 const initialState={
     time: "",
@@ -7,7 +7,7 @@ const initialState={
     title:'',
     views:''
 }
-function AddVideo({ addV }) {
+function AddVideo({ addV,editableVideo}) {
     const [video, setVideo] = useState(initialState);
     function handleSubmit(e) {
         e.stopPropagation()
@@ -22,9 +22,14 @@ function AddVideo({ addV }) {
             ...video,
             [e.target.name]: e.target.value
         })
-        
-
     }
+    // Update 
+    useEffect(()=>{
+        if(editableVideo){
+
+            setVideo(editableVideo)
+        }
+    },[editableVideo])
     return (
         <form >
             <div className="d-flex" style={{ flexDirection:'column',margin:"0 auto", width: '20%' }}>
