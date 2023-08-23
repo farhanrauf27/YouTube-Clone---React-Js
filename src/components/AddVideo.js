@@ -7,12 +7,16 @@ const initialState={
     title:'',
     views:''
 }
-function AddVideo({ addV,editableVideo}) {
+function AddVideo({ addV,editableVideo,update}) {
     const [video, setVideo] = useState(initialState);
     function handleSubmit(e) {
         e.stopPropagation()
         e.preventDefault()
-        addV(video)
+        if(editableVideo){
+            update(video)
+        }else{
+            addV(video)
+        }
         setVideo(initialState)
         
     }
@@ -42,7 +46,7 @@ function AddVideo({ addV,editableVideo}) {
                 <label htmlFor="verfied">is verified </label>
                 <input onChange={handleChange} className="my-2 mx-2" type="checkbox" name="verfied" id=""  value={video.verfied} />
                 </div>
-            <button className="btn btn-danger my-2" onClick={handleSubmit}> Add Video</button>
+            <button className="btn btn-danger my-2" onClick={handleSubmit}>{editableVideo?"Update ":"Add "}Video</button>
                 </div>
             </div>
         </form>
