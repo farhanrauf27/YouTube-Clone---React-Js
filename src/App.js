@@ -5,12 +5,11 @@ import VideoList from "./components/VideoList";
 
 
 import "./App.css";
-import { useReducer, useState } from "react";
+import { useContext, useReducer, useState } from "react";
+import ThemeContext from "./context/themeContext";
 
 function App() {
- 
   const [editableVideo, seteditableVideo] = useState(null);
-
   function videoReducer(videos,action){
     switch(action.type){
       case 'ADD':
@@ -30,6 +29,7 @@ function App() {
 
   }
   const [videos,dispatch]= useReducer(videoReducer,exportVideo)
+  const themeContext = useContext(ThemeContext)
 
   // const [videos, setVideos] = useState(exportVideo);
   
@@ -68,13 +68,16 @@ function App() {
 
   }
   return (
-    <div className="App" onClick={() => console.log("App")}>
+    <>
+    
+    <div className={`App ${themeContext}`} onClick={() => console.log("App")}>
       <div className="d-flex" style={{justifyContent:'space-around'}}>
       {/* delete  Update */}
         <VideoList deleteVideo={deleteVideo} editVideo={editVideo} videos={videos}></VideoList> 
         <AddVideo editableVideo={editableVideo} update={update} addV={addVideos}></AddVideo>
       </div>
     </div>
+    </>
   );
 }
 
